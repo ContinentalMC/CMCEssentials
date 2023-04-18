@@ -1,0 +1,8 @@
+# EVERYTHING SHOULD BE IN LOWER CASE! Plugin detects when you've included the words listed in the list!
+welcome-options:
+  - "welcome back"
+  - "welcome"
+  - "wb"
+  - "welcome!"
+# AMOUNT OF MONEY TO GIVE TO PLAYER THAT WELCOMES OTHERS
+welcome-amount: 1

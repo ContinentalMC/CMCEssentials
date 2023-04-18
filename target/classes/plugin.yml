@@ -1,0 +1,7 @@
+name: CMCEssentials
+version: '1.0-SNAPSHOT'
+main: com.yopal.continentalmc.CMCEssentials
+api-version: 1.16
+depend: [Vault]
+commands:
+  cmc:
