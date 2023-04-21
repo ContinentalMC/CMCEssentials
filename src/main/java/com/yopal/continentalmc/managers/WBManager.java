@@ -53,7 +53,9 @@ public class WBManager {
                 playerWBSToRemove.add(playerWB);
             }
         }
+
         playerWBList.removeAll(playerWBSToRemove);
+
 
 
     }
