@@ -1,22 +1,25 @@
 package com.yopal.continentalmc.instances;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class PlayerWB {
 
-    private Player playerThatJoined;
+    private UUID playerThatJoinedUUID;
 
-    private Player playerToChat;
+    private UUID playerToChatUUID;
 
-    public PlayerWB(Player playerThatJoined, Player playerToChat) {
-        this.playerThatJoined = playerThatJoined;
-        this.playerToChat = playerToChat;
+    public PlayerWB(UUID playerThatJoinedUUID, UUID playerToChatUUID) {
+        this.playerToChatUUID = playerToChatUUID;
+        this.playerThatJoinedUUID = playerToChatUUID;
     }
 
     // getters
 
-    public Player getPlayerToChat() { return playerToChat; }
-    public Player getPlayerThatJoined() { return playerThatJoined; }
+    public Player getPlayerToChat() { return Bukkit.getPlayer(playerThatJoinedUUID); }
+    public Player getPlayerThatJoined() { return Bukkit.getPlayer(playerToChatUUID); }
 
 
 

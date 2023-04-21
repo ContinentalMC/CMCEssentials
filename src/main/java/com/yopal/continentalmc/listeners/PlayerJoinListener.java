@@ -38,7 +38,7 @@ public class PlayerJoinListener implements Listener {
             if (player == e.getPlayer()) {
                 continue;
             }
-            WBManager.addPlayerWB(new PlayerWB(e.getPlayer(), player));
+            WBManager.addPlayerWB(new PlayerWB(e.getPlayer().getUniqueId(), player.getUniqueId()));
         }
 
         Bukkit.getScheduler().runTaskLater(cmc, ()->{

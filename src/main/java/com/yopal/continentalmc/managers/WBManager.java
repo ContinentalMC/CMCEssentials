@@ -4,6 +4,7 @@ import com.yopal.continentalmc.instances.PlayerWB;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ConcurrentModificationException;
 import java.util.List;
 
@@ -46,14 +47,14 @@ public class WBManager {
         if (playerWBList.isEmpty()) { return; }
 
         // error is right here
-        try {
-            for (PlayerWB playerWB : playerWBList) {
-                if (playerWB.getPlayerThatJoined() == player) {
-                    playerWBList.remove(playerWB);
-                }
+        Collection<PlayerWB> playerWBSToRemove = new ArrayList<>();
+        for (PlayerWB playerWB : playerWBList) {
+            if (playerWB.getPlayerThatJoined() == player) {
+                playerWBSToRemove.add(playerWB);
             }
-        } catch (ConcurrentModificationException e) {
         }
+        playerWBList.removeAll(playerWBSToRemove);
+
 
     }
 
