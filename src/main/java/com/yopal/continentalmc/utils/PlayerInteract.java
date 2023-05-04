@@ -11,8 +11,8 @@ import org.bukkit.entity.Player;
 
 public class PlayerInteract {
 
-    private static String prefix = ChatColor.GREEN + "[" + ChatColor.BLUE + "CMC" + ChatColor.GREEN  + "] " + ChatColor.GRAY;
-    private static TextComponent prefixComponent = new TextComponent("§7[§cEasyGifts§7] ");
+    private static String prefix = ChatColor.GREEN + "[" + ChatColor.AQUA + "CMC" + ChatColor.GREEN  + "] " + ChatColor.GRAY;
+    private static TextComponent prefixComponent = new TextComponent("§a[§bCMC§a] ");
 
     // Server messaging
     /**

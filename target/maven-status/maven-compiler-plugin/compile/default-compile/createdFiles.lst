@@ -1,4 +1,6 @@
 com\yopal\continentalmc\utils\PlayerInteract$1.class
+com\yopal\continentalmc\managers\RecipeManager.class
+com\yopal\continentalmc\managers\YML\ScoreManager.class
 com\yopal\continentalmc\enums\MessageTypes.class
 com\yopal\continentalmc\listeners\PlayerChatListener.class
 com\yopal\continentalmc\commands\CMCCommand.class

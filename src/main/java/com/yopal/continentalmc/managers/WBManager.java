@@ -56,8 +56,6 @@ public class WBManager {
 
         playerWBList.removeAll(playerWBSToRemove);
 
-
-
     }
 
     public static void removePlayerWB(PlayerWB playerWB) {
