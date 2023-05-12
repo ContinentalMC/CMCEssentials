@@ -1,6 +1,9 @@
 package com.yopal.continentalmc.commands;
 
 import com.yopal.continentalmc.CMCEssentials;
+import com.yopal.continentalmc.gambling.henry.managers.HenryManager;
+import com.yopal.continentalmc.gambling.machines.slots.instances.SlotGUI;
+import com.yopal.continentalmc.managers.YML.CasinoManager;
 import com.yopal.continentalmc.managers.YML.ConfigManager;
 import com.yopal.continentalmc.managers.YML.EmojiManager;
 import com.yopal.continentalmc.managers.YML.ScoreManager;
@@ -30,15 +33,28 @@ public class CMCCommand implements CommandExecutor {
             return false;
         }
 
+        // testing
+        if (args[0].equalsIgnoreCase("t")) {
+            new SlotGUI(cmc, ((Player) sender).getPlayer(), 40);
+            return true;
+        }
+
         Player player = (Player) sender;
 
         if (args[0].equalsIgnoreCase("reload") && player.hasPermission("cmc.admin.reload")) {
             ConfigManager.reloadConfig(cmc);
             ScoreManager.reloadFile(cmc);
             EmojiManager.reloadFile(cmc);
+            CasinoManager.reloadFile(cmc);
             PlayerInteract.sendMessage(player, ChatColor.GREEN + "Files successfully reloaded!");
         } else if (args[0].equalsIgnoreCase("reload") && !player.hasPermission("cmc.admin.reload")) {
             PlayerInteract.sendLackPermission(player, "cmc.admin.reload");
+        }
+
+        if (args[0].equalsIgnoreCase("spawnHenry") && player.hasPermission("cmc.admin.spawnHenry")) {
+            HenryManager.spawn(cmc, player.getLocation());
+        } else if (args[0].equalsIgnoreCase("spawnHenry") && !player.hasPermission("cmc.admin.spawnHenry")) {
+            PlayerInteract.sendLackPermission(player, "cmc.admin.spawnHenry");
         }
 
         if (args[0].equalsIgnoreCase("emojis") && player.hasPermission("cmc.user.emojisList")) {

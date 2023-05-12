@@ -13,13 +13,13 @@ public class PlayerWB {
 
     public PlayerWB(UUID playerThatJoinedUUID, UUID playerToChatUUID) {
         this.playerToChatUUID = playerToChatUUID;
-        this.playerThatJoinedUUID = playerToChatUUID;
+        this.playerThatJoinedUUID = playerThatJoinedUUID;
     }
 
     // getters
 
-    public Player getPlayerToChat() { return Bukkit.getPlayer(playerThatJoinedUUID); }
-    public Player getPlayerThatJoined() { return Bukkit.getPlayer(playerToChatUUID); }
+    public Player getPlayerToChat() { return Bukkit.getPlayer(playerToChatUUID); }
+    public Player getPlayerThatJoined() { return Bukkit.getPlayer(playerThatJoinedUUID); }
 
 
 

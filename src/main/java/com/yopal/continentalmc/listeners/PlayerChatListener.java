@@ -45,18 +45,19 @@ public class PlayerChatListener implements Listener {
             return;
         }
 
-        WBManager.removePlayerWB(playerWB);
-
         // adding money
         PlayerInteract.sendMessage(player, "Thank you for contributing to a friendly community! Here's $" + ConfigManager.getWelcomeAmount() + " for your efforts!");
         Economy econ = cmc.getEconomy();
+        econ.depositPlayer(player, ConfigManager.getWelcomeAmount());
 
         // adding karma
         UUID playerUUID = player.getUniqueId();
         PlayerInteract.sendMessage(player, ChatColor.LIGHT_PURPLE + "+3 Karma!");
         ScoreManager.setScore(cmc, playerUUID, ScoreManager.getScore(playerUUID) + 3);
 
-        econ.depositPlayer(player, ConfigManager.getWelcomeAmount());
+        WBManager.removePlayerWB(playerWB);
+
+
     }
 
 
