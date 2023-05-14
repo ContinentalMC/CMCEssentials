@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class TokenManager {
+
     public static HashMap<Integer, ItemStack> giveBasicToken(Player player) {
         ItemStack itemStack = new ItemStack(Material.GRAY_DYE);
 
@@ -41,7 +42,7 @@ public class TokenManager {
     }
 
     public static HashMap<Integer, ItemStack> giveSpecialToken(Player player) {
-        ItemStack itemStack = new ItemStack(Material.PINK_DYE);
+        ItemStack itemStack = new ItemStack(Material.MAGENTA_DYE);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(ChatColor.GOLD + ChatColor.BOLD.toString() + "CMCasino Token");
 
@@ -57,7 +58,7 @@ public class TokenManager {
     }
 
     public static HashMap<Integer, ItemStack> giveInsaneToken(Player player) {
-        ItemStack itemStack = new ItemStack(Material.PINK_DYE);
+        ItemStack itemStack = new ItemStack(Material.PURPLE_DYE);
         ItemMeta itemMeta = itemStack.getItemMeta();
         itemMeta.setDisplayName(ChatColor.GOLD + ChatColor.BOLD.toString() + "CMCasino Token");
 

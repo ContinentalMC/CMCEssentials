@@ -41,7 +41,7 @@ public class TokenBuyListener implements Listener {
         String fullInventory = PlayerInteract.returnPrefix() + ChatColor.GOLD + ChatColor.BOLD + "Henry: " + ChatColor.RED + "Your inventory is too full to receive a token!";
 
         switch (e.getSlot()) {
-            case 11:
+            case 10:
                 if (playerBal < hashMap.get("basic-coin")) {
                     player.sendMessage(insufficientFunds);
                     player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
@@ -60,7 +60,7 @@ public class TokenBuyListener implements Listener {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1, 2);
 
                 break;
-            case 13:
+            case 12:
                 if (playerBal < hashMap.get("good-coin")) {
                     player.sendMessage(insufficientFunds);
                     player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
@@ -79,14 +79,14 @@ public class TokenBuyListener implements Listener {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1, 2);
 
                 break;
-            case 15:
+            case 14:
                 if (playerBal < hashMap.get("special-coin")) {
                     player.sendMessage(insufficientFunds);
                     player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
                     break;
                 }
 
-                HashMap<Integer, ItemStack> extraItems3 = TokenManager.giveGoodToken(player);
+                HashMap<Integer, ItemStack> extraItems3 = TokenManager.giveSpecialToken(player);
 
                 if (!extraItems3.isEmpty()) {
                     player.sendMessage(fullInventory);
@@ -98,14 +98,14 @@ public class TokenBuyListener implements Listener {
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1, 2);
 
                 break;
-            case 17:
+            case 16:
                 if (playerBal < hashMap.get("insane-coin")) {
                     player.sendMessage(insufficientFunds);
                     player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1, 1);
                     break;
                 }
 
-                HashMap<Integer, ItemStack> extraItems4 = TokenManager.giveGoodToken(player);
+                HashMap<Integer, ItemStack> extraItems4 = TokenManager.giveInsaneToken(player);
 
                 if (!extraItems4.isEmpty()) {
                     player.sendMessage(fullInventory);

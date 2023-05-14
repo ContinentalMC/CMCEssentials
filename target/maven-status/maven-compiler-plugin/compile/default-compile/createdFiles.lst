@@ -1,3 +1,4 @@
+com\yopal\continentalmc\gambling\henry\listeners\PlayerCloseHenryListener.class
 com\yopal\continentalmc\managers\YML\CasinoManager.class
 com\yopal\continentalmc\gambling\henry\managers\HenryGUIManager.class
 com\yopal\continentalmc\enums\MessageTypes.class
