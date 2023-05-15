@@ -1,8 +1,11 @@
 package com.yopal.continentalmc.commands;
 
+import com.sun.nio.sctp.IllegalReceiveException;
 import com.yopal.continentalmc.CMCEssentials;
+import com.yopal.continentalmc.gambling.enums.MachineTypes;
 import com.yopal.continentalmc.gambling.henry.managers.HenryManager;
 import com.yopal.continentalmc.gambling.machines.slots.instances.SlotGUI;
+import com.yopal.continentalmc.gambling.managers.MachineCreationManager;
 import com.yopal.continentalmc.managers.YML.CasinoManager;
 import com.yopal.continentalmc.managers.YML.ConfigManager;
 import com.yopal.continentalmc.managers.YML.EmojiManager;
@@ -10,11 +13,15 @@ import com.yopal.continentalmc.managers.YML.ScoreManager;
 import com.yopal.continentalmc.utils.PlayerInteract;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.Set;
 
 public class CMCCommand implements CommandExecutor {
 
@@ -55,6 +62,40 @@ public class CMCCommand implements CommandExecutor {
             HenryManager.spawn(cmc, player.getLocation());
         } else if (args[0].equalsIgnoreCase("spawnHenry") && !player.hasPermission("cmc.admin.spawnHenry")) {
             PlayerInteract.sendLackPermission(player, "cmc.admin.spawnHenry");
+        }
+
+        if (args[0].equalsIgnoreCase("createMachine") && player.hasPermission("cmc.admin.createMachine")) {
+            if (args.length == 1) {
+                PlayerInteract.sendInvalidUsage(player, "Please input a name for the machine!");
+                return false;
+            }
+
+            if (args.length == 2) {
+                PlayerInteract.sendInvalidUsage(player, "Please input the machine type!");
+                return false;
+            }
+
+            MachineTypes type;
+
+            try {
+                type = MachineTypes.valueOf(args[2].toUpperCase());
+            } catch (IllegalArgumentException e) {
+                PlayerInteract.sendInvalidUsage(player, "That's not a machine type!");
+                return false;
+            }
+
+            Block block = player.getTargetBlock((Set<Material>) null, 5);
+            if (block == null) {
+                return false;
+            }
+
+            // TODO check for pdcs
+
+            MachineCreationManager.createMachine(type, block, args[1]);
+
+
+        } else if (args[0].equalsIgnoreCase("createMachine") && !player.hasPermission("cmc.admin.createmMachine")) {
+            PlayerInteract.sendLackPermission(player, "cmc.admin.createMachine");
         }
 
         if (args[0].equalsIgnoreCase("emojis") && player.hasPermission("cmc.user.emojisList")) {
