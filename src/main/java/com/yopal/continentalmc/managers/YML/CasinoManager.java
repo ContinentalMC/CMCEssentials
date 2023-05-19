@@ -3,6 +3,7 @@ package com.yopal.continentalmc.managers.YML;
 import com.yopal.continentalmc.CMCEssentials;
 import com.yopal.continentalmc.gambling.enums.MachineTypes;
 import org.bukkit.block.Block;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -42,7 +43,25 @@ public class CasinoManager {
         return casinoYML.getStringList("henryWelcomes");
     }
 
-    public static void getFromName(String name) {
+    public static boolean isMachine(String name) {
+        return casinoYML.contains("machines." + name);
+    }
+
+    public static boolean isMachine(Block block) {
+        ConfigurationSection configSection = casinoYML.getConfigurationSection("machines.");
+
+        if (configSection.getKeys(false).isEmpty()) {
+            return false;
+        }
+
+        for (String string : configSection.getKeys(false)) {
+            if (casinoYML.getLocation("machines." + string + ".location").equals(block.getLocation())) {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
 

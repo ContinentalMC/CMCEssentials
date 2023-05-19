@@ -22,6 +22,7 @@ com\yopal\continentalmc\gambling\managers\CelebrationManager$1.class
 com\yopal\continentalmc\gambling\henry\instances\HenryGUI.class
 com\yopal\continentalmc\listeners\PlayerJoinListener.class
 com\yopal\continentalmc\gambling\listeners\PlayerDamageFireworkListener.class
+com\yopal\continentalmc\gambling\managers\MachineCreationManager.class
 com\yopal\continentalmc\gambling\enums\MachineTypes.class
 com\yopal\continentalmc\commands\CMCTabCompleter.class
 com\yopal\continentalmc\listeners\PlayerEmojiListener.class

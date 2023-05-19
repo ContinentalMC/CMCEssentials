@@ -18,7 +18,7 @@ public class CMCTabCompleter implements TabCompleter {
         }
 
         if (args.length == 1) {
-            return StringUtil.copyPartialMatches(args[0], Arrays.asList("reload", "emojis", "getScore"), new ArrayList<>());
+            return StringUtil.copyPartialMatches(args[0], Arrays.asList("reload", "emojis", "getScore", "createMachine"), new ArrayList<>());
         }
 
         return null;

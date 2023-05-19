@@ -5,7 +5,9 @@ import com.yopal.continentalmc.commands.CMCTabCompleter;
 import com.yopal.continentalmc.gambling.henry.listeners.PlayerCloseHenryListener;
 import com.yopal.continentalmc.gambling.henry.listeners.PlayerInteractHenryListener;
 import com.yopal.continentalmc.gambling.henry.listeners.TokenBuyListener;
+import com.yopal.continentalmc.gambling.listeners.MachineInteractListener;
 import com.yopal.continentalmc.gambling.listeners.PlayerDamageFireworkListener;
+import com.yopal.continentalmc.gambling.machines.listeners.InteractMachineListener;
 import com.yopal.continentalmc.listeners.PlayerChatListener;
 import com.yopal.continentalmc.listeners.PlayerEmojiListener;
 import com.yopal.continentalmc.listeners.PlayerJoinListener;
@@ -57,6 +59,7 @@ public final class CMCEssentials extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerInteractHenryListener(this), this);
         Bukkit.getPluginManager().registerEvents(new TokenBuyListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerCloseHenryListener(), this);
+        Bukkit.getPluginManager().registerEvents(new InteractMachineListener(), this);
 
         if (!setupEconomy() ) {
             getLogger().severe(String.format("Disabled due to no Vault dependency found!"));

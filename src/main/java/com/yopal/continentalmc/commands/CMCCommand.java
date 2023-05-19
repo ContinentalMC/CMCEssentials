@@ -1,11 +1,10 @@
 package com.yopal.continentalmc.commands;
 
-import com.sun.nio.sctp.IllegalReceiveException;
 import com.yopal.continentalmc.CMCEssentials;
 import com.yopal.continentalmc.gambling.enums.MachineTypes;
 import com.yopal.continentalmc.gambling.henry.managers.HenryManager;
 import com.yopal.continentalmc.gambling.machines.slots.instances.SlotGUI;
-import com.yopal.continentalmc.gambling.managers.MachineCreationManager;
+import com.yopal.continentalmc.gambling.machines.managers.MachineCreationManager;
 import com.yopal.continentalmc.managers.YML.CasinoManager;
 import com.yopal.continentalmc.managers.YML.ConfigManager;
 import com.yopal.continentalmc.managers.YML.EmojiManager;
@@ -13,15 +12,12 @@ import com.yopal.continentalmc.managers.YML.ScoreManager;
 import com.yopal.continentalmc.utils.PlayerInteract;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.Set;
 
 public class CMCCommand implements CommandExecutor {
 
@@ -75,6 +71,16 @@ public class CMCCommand implements CommandExecutor {
                 return false;
             }
 
+            if (args.length == 3) {
+                PlayerInteract.sendInvalidUsage(player, "Please input the winning percentage!");
+                return false;
+            }
+
+            if (CasinoManager.isMachine(args[0])) {
+                PlayerInteract.sendMessage(player, "Please choose a different name!");
+                return false;
+            }
+
             MachineTypes type;
 
             try {
@@ -84,15 +90,20 @@ public class CMCCommand implements CommandExecutor {
                 return false;
             }
 
-            Block block = player.getTargetBlock((Set<Material>) null, 5);
+            Block block = player.getTargetBlock(null, 5);
             if (block == null) {
                 return false;
             }
 
-            // TODO check for pdcs
+            int winPercentage;
+            try {
+                winPercentage = Integer.parseInt(args[3]);
+            } catch (NumberFormatException e) {
+                PlayerInteract.sendInvalidUsage(player, "Please input a real number!");
+                return false;
+            }
 
-            MachineCreationManager.createMachine(type, block, args[1]);
-
+            MachineCreationManager.createMachine(cmc, type, block, args[1], winPercentage);
 
         } else if (args[0].equalsIgnoreCase("createMachine") && !player.hasPermission("cmc.admin.createmMachine")) {
             PlayerInteract.sendLackPermission(player, "cmc.admin.createMachine");
