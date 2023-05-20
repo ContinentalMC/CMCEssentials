@@ -1,0 +1,17 @@
+# COIN COSTS
+coins:
+  basic-coin: 1000
+  good-coin: 5000
+  special-coin: 10000
+  insane-coin: 25000
+
+# HENRY WELCOME MESSAGES
+henryWelcomes:
+  - "Welcome to CMCasino! How may I help?"
+  - "In a gambling mood I see, I wish you the best of luck!"
+  - "Feelin lucky today?"
+  - "Looking great as always! How many tokens would you like to purchase?"
+  - "Thank you for coming to CMCasino! Ready to play?"
+  - "CMCasino is glad to have you! How many tokens would you like?"
+  - "You should try out the Rock Paper Scissors today, I think you'd do great!"
+  - "CMCasino is grateful to have you here! What tokens would you like?"
