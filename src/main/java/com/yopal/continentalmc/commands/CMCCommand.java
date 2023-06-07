@@ -3,7 +3,6 @@ package com.yopal.continentalmc.commands;
 import com.yopal.continentalmc.CMCEssentials;
 import com.yopal.continentalmc.gambling.enums.MachineTypes;
 import com.yopal.continentalmc.gambling.henry.managers.HenryManager;
-import com.yopal.continentalmc.gambling.machines.slots.instances.SlotGUI;
 import com.yopal.continentalmc.gambling.machines.managers.MachineCreationManager;
 import com.yopal.continentalmc.managers.YML.CasinoManager;
 import com.yopal.continentalmc.managers.YML.ConfigManager;
@@ -18,6 +17,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import java.util.UUID;
 
 public class CMCCommand implements CommandExecutor {
 
@@ -34,12 +35,6 @@ public class CMCCommand implements CommandExecutor {
 
         if (args.length == 0) {
             return false;
-        }
-
-        // testing
-        if (args[0].equalsIgnoreCase("t")) {
-            new SlotGUI(cmc, ((Player) sender).getPlayer(), 40);
-            return true;
         }
 
         Player player = (Player) sender;
@@ -76,8 +71,8 @@ public class CMCCommand implements CommandExecutor {
                 return false;
             }
 
-            if (CasinoManager.isMachine(args[0])) {
-                PlayerInteract.sendMessage(player, "Please choose a different name!");
+            if (CasinoManager.isMachine(args[1])) {
+                PlayerInteract.sendInvalidUsage(player, "Please choose a different name!");
                 return false;
             }
 
@@ -107,6 +102,24 @@ public class CMCCommand implements CommandExecutor {
 
         } else if (args[0].equalsIgnoreCase("createMachine") && !player.hasPermission("cmc.admin.createmMachine")) {
             PlayerInteract.sendLackPermission(player, "cmc.admin.createMachine");
+        }
+
+        if (args[0].equalsIgnoreCase("removeMachine") && player.hasPermission("cmc.admin.removeMachine")) {
+            if (args.length == 1) {
+                PlayerInteract.sendInvalidUsage(player, "Please input the machine name to remove!");
+                return false;
+            }
+
+            if (!CasinoManager.isMachine(args[1])) {
+                PlayerInteract.sendInvalidUsage(player, "That's not a machine!");
+                return false;
+            }
+
+            for (UUID uuid : CasinoManager.getArmorStandUUIDs(args[1])) {
+                Bukkit.getEntity(uuid).remove();
+            }
+
+            CasinoManager.removeMachine(cmc, args[1]);
         }
 
         if (args[0].equalsIgnoreCase("emojis") && player.hasPermission("cmc.user.emojisList")) {

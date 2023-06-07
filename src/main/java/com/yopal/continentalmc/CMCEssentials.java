@@ -5,9 +5,11 @@ import com.yopal.continentalmc.commands.CMCTabCompleter;
 import com.yopal.continentalmc.gambling.henry.listeners.PlayerCloseHenryListener;
 import com.yopal.continentalmc.gambling.henry.listeners.PlayerInteractHenryListener;
 import com.yopal.continentalmc.gambling.henry.listeners.TokenBuyListener;
-import com.yopal.continentalmc.gambling.listeners.MachineInteractListener;
 import com.yopal.continentalmc.gambling.listeners.PlayerDamageFireworkListener;
+import com.yopal.continentalmc.gambling.machines.impostor.listeners.ImpostorGUIInteractListener;
 import com.yopal.continentalmc.gambling.machines.listeners.InteractMachineListener;
+import com.yopal.continentalmc.gambling.machines.listeners.MachineCloseListener;
+import com.yopal.continentalmc.gambling.machines.slots.listeners.SlotGUIInteractListener;
 import com.yopal.continentalmc.listeners.PlayerChatListener;
 import com.yopal.continentalmc.listeners.PlayerEmojiListener;
 import com.yopal.continentalmc.listeners.PlayerJoinListener;
@@ -19,7 +21,6 @@ import com.yopal.continentalmc.managers.YML.EmojiManager;
 import com.yopal.continentalmc.managers.YML.ScoreManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
-import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -59,7 +60,10 @@ public final class CMCEssentials extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerInteractHenryListener(this), this);
         Bukkit.getPluginManager().registerEvents(new TokenBuyListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerCloseHenryListener(), this);
-        Bukkit.getPluginManager().registerEvents(new InteractMachineListener(), this);
+        Bukkit.getPluginManager().registerEvents(new InteractMachineListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new MachineCloseListener(), this);
+        Bukkit.getPluginManager().registerEvents(new SlotGUIInteractListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new ImpostorGUIInteractListener(this), this);
 
         if (!setupEconomy() ) {
             getLogger().severe(String.format("Disabled due to no Vault dependency found!"));

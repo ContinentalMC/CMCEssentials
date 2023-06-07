@@ -3,14 +3,14 @@ package com.yopal.continentalmc.gambling.machines.slots.instances;
 import com.yopal.continentalmc.CMCEssentials;
 import com.yopal.continentalmc.gambling.managers.CelebrationManager;
 import com.yopal.continentalmc.gambling.utils.PageUtil;
+import com.yopal.continentalmc.managers.YML.CasinoManager;
 import com.yopal.continentalmc.utils.PlayerInteract;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import net.milkbowl.vault.economy.Economy;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 import java.util.List;
@@ -108,6 +108,16 @@ public class SlotGUI {
         Inventory inv = Bukkit.createInventory(player, 27, PlayerInteract.returnPrefix() + "Slot Machine");
         PageUtil.createRainbowFrames(cmc, inv, 0, 26);
 
+        // CLOSE
+        PageUtil.setItem(inv, ChatColor.RED + ChatColor.BOLD.toString() + "CLOSE", Material.BARRIER, Arrays.asList(
+                ChatColor.GREEN + ChatColor.BOLD.toString() + "[CLICK] " + ChatColor.GRAY + "To close!"
+        ), 9);
+
+        // REROLL
+        PageUtil.setCustomSkull(inv, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDc1ZDNkYjAzZGMyMWU1NjNiMDM0MTk3ZGE0MzViNzllY2ZlZjRiOGUyZWNkYjczMGUzNzBjMzE2NjI5ZDM2ZiJ9fX0=", 17);
+        PageUtil.updateDisplayName(inv, 17, ChatColor.RED + ChatColor.BOLD.toString() + "RE-ROLL");
+        PageUtil.updateLore(inv, 17, Arrays.asList(ChatColor.RED + "Please wait until this machine has stopped rolling!"));
+
         PageUtil.cycleItemsInSlot(cmc, inv, 12, materialList, player, 20);
         PageUtil.cycleItemsInSlot(cmc, inv, 13, materialList, player, 55);
         PageUtil.cycleItemsInSlot(cmc, inv, 14, materialList, player, 90);
@@ -137,11 +147,45 @@ public class SlotGUI {
             player.playSound(player.getLocation(), Sound.BLOCK_PISTON_EXTEND, 1, 1.25f);
         }, 90);
 
-        Bukkit.getScheduler().runTaskLater(cmc, ()->{
+        Bukkit.getScheduler().runTaskLater(cmc, ()-> {
+
+            if (checkHasToken()) {
+                PageUtil.updateDisplayName(inv, 17, ChatColor.GREEN + ChatColor.BOLD.toString() + "RE-ROLL");
+                PageUtil.updateLore(inv, 17, Arrays.asList(ChatColor.GREEN + ChatColor.BOLD.toString() + "[CLICK] " + ChatColor.GRAY + "To re-roll the slot machine!"));
+            } else {
                 player.closeInventory();
-                provideResponse(materials, win, player);
+            }
+
+            provideResponse(materials, win, player);
         }, 130);
 
+    }
+
+    private boolean checkHasToken() {
+
+        NamespacedKey tokenTypeKey = new NamespacedKey(cmc, "tokenType");
+
+        for (ItemStack itemStack : player.getInventory().getContents()) {
+            if (itemStack == null) {
+                continue;
+            }
+
+            if (!itemStack.hasItemMeta()) {
+                continue;
+            }
+
+            if (!itemStack.getItemMeta().getPersistentDataContainer().has(tokenTypeKey, PersistentDataType.STRING)) {
+                continue;
+            }
+
+            if (!itemStack.getItemMeta().getPersistentDataContainer().get(tokenTypeKey, PersistentDataType.STRING).equalsIgnoreCase("basic")) {
+                continue;
+            }
+
+            return true;
+        }
+
+        return false;
 
     }
 
@@ -152,33 +196,34 @@ public class SlotGUI {
             return;
         }
 
-        CelebrationManager.summonFireworkSlot(player.getUniqueId(), materials.get(0), cmc);
+        if (player != null) {
+            CelebrationManager.summonFireworkSlot(player.getUniqueId(), materials.get(0), cmc);
+        }
+
+        Economy econ = CMCEssentials.getEconomy();
 
         // work on giving configurable money to players for each prize
         switch (materials.get(0)) {
             case DIAMOND:
                 player.sendMessage(PlayerInteract.returnPrefix() + ChatColor.GOLD + ChatColor.BOLD + "Henry: " + ChatColor.GRAY + "Wow aren't you lucky?! You got the highest prize! You should test out your luck again :)");
-                player.playSound(player.getLocation(), Sound.ENTITY_ENDER_DRAGON_GROWL, 1, 1);
                 break;
             case EMERALD:
                 player.sendMessage(PlayerInteract.returnPrefix() + ChatColor.GOLD + ChatColor.BOLD + "Henry: " + ChatColor.GRAY + "Nice! Ready to play again?");
-                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1, 1);
                 break;
             case LAPIS_LAZULI:
                 player.sendMessage(PlayerInteract.returnPrefix() + ChatColor.GOLD + ChatColor.BOLD + "Henry: " + ChatColor.GRAY + "Good job! Want to try again?");
-                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1, 1);
                 break;
             case IRON_INGOT:
                 player.sendMessage(PlayerInteract.returnPrefix() + ChatColor.GOLD + ChatColor.BOLD + "Henry: " + ChatColor.GRAY + "Gooood. I think you can get a better prize by trying again.");
-                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1, 1);
                 break;
             case COAL:
                 player.sendMessage(PlayerInteract.returnPrefix() + ChatColor.GOLD + ChatColor.BOLD + "Henry: " + ChatColor.GRAY + "Ehhh, not much but at least it's not nothing!");
-                player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1, 1);
                 break;
         }
-    }
 
+        player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1, 1);
+        econ.depositPlayer(player, CasinoManager.getSlotWinning(materials.get(0)));
+    }
 
 
 

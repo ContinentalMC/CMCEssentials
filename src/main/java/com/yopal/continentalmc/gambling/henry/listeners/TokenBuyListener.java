@@ -48,7 +48,7 @@ public class TokenBuyListener implements Listener {
                     break;
                 }
 
-                HashMap<Integer, ItemStack> extraItems1 = TokenManager.giveBasicToken(player);
+                HashMap<Integer, ItemStack> extraItems1 = TokenManager.giveBasicToken(cmc, player);
 
                 if (!extraItems1.isEmpty()) {
                     player.sendMessage(fullInventory);
@@ -67,7 +67,7 @@ public class TokenBuyListener implements Listener {
                     break;
                 }
 
-                HashMap<Integer, ItemStack> extraItems2 = TokenManager.giveGoodToken(player);
+                HashMap<Integer, ItemStack> extraItems2 = TokenManager.giveGoodToken(cmc, player);
 
                 if (!extraItems2.isEmpty()) {
                     player.sendMessage(fullInventory);
@@ -86,7 +86,7 @@ public class TokenBuyListener implements Listener {
                     break;
                 }
 
-                HashMap<Integer, ItemStack> extraItems3 = TokenManager.giveSpecialToken(player);
+                HashMap<Integer, ItemStack> extraItems3 = TokenManager.giveSpecialToken(cmc, player);
 
                 if (!extraItems3.isEmpty()) {
                     player.sendMessage(fullInventory);
@@ -105,7 +105,7 @@ public class TokenBuyListener implements Listener {
                     break;
                 }
 
-                HashMap<Integer, ItemStack> extraItems4 = TokenManager.giveInsaneToken(player);
+                HashMap<Integer, ItemStack> extraItems4 = TokenManager.giveInsaneToken(cmc, player);
 
                 if (!extraItems4.isEmpty()) {
                     player.sendMessage(fullInventory);

@@ -15,3 +15,121 @@ henryWelcomes:
   - "CMCasino is glad to have you! How many tokens would you like?"
   - "You should try out the Rock Paper Scissors today, I think you'd do great!"
   - "CMCasino is grateful to have you here! What tokens would you like?"
+
+# IMPOSTOR
+randomNames:
+  - "Bob"
+  - "Henry"
+  - "Harry"
+  - "Jerry"
+  - "Gary"
+  - "Sarah"
+  - "Tom"
+  - "Gerald"
+  - "Felicia"
+  - "Garcia"
+  - "Jeremy"
+  - "Tommy"
+  - "Thomas"
+  - "Frank"
+
+personality:
+  job:
+    - "Farmer"
+    - "Fisherman"
+    - "Engineer"
+    - "Tinkerer"
+    - "Salesman"
+    - "Influencer"
+    - "Manager"
+    - "Lawyer"
+    - "Lifeguard"
+    - "Artist"
+    - "Therapist"
+    - "Plumber"
+    - "Game Designer"
+    - "Developer"
+    - "Technician"
+    - "Electrician"
+    - "Librarian"
+    - "Teacher"
+    - "Principal"
+    - "Uber Driver"
+    - "Saleswoman"
+    - "Cook"
+  favAnimal:
+    - "Panda"
+    - "Cat"
+    - "Pig"
+    - "Wolf"
+    - "Camel"
+    - "Sheep"
+    - "Cow"
+    - "Turtle"
+    - "Bat"
+    - "Rabbit"
+    - "Llama"
+    - "Horse"
+    - "Parrot"
+  favColor:
+    - "Red"
+    - "Blue"
+    - "White"
+    - "Black"
+    - "Yellow"
+    - "Green"
+    - "Pink"
+    - "Purple"
+    - "Gray"
+    - "Brown"
+    - "Orange"
+  favHobby:
+    - "Playing piano"
+    - "Playing video games"
+    - "Watching TV"
+    - "Reading"
+    - "Writing"
+    - "Swimming"
+    - "Playing basketball"
+    - "Playing guitar"
+    - "Drawing"
+    - "Painting"
+    - "Scrolling through TikTok"
+    - "Scrolling through YT Shorts"
+    - "Watching movies"
+    - "Farming"
+    - "Fishing"
+    - "Acting"
+    - "Cooking"
+    - "Dancing"
+    - "Singing"
+    - "Running"
+
+
+villagerTextures:
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNzQ4MjQzNzViNTVmYzg1YjY0NjY3NWM5Zjc5OWVkOThlMjZiNDI3NzhkMmFhMTE0NTdhYjE4Y2E4NGNkYzJlOCJ9fX0="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvNjRjODUxOGY4NzYwMzM2MThjZGRkN2I4ZWZhOTlmMjk0YmUyNjA5Y2Y5OTU2ODczYjkxZGRlODc2ZTg1MzJjIn19fQ=="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDBkNGNhYWE1NTRhZWY4OWM4ZDA3NDc2Zjg3ZTA2NzlkYjBkZmJiYjM1YmVhMGVkMjQ4ZjgzZWZhYWQ4YjgzOCJ9fX0="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTI3ODQ0NDNlMGY2NTcxZjVmMzVmY2QyZTdmZWUzYjc2YjcyMmVmOThhMDA1ZmFhYWVjN2RiNDRmZjA2NmNhOCJ9fX0="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTJjZTliNDJjYjFmNjY0ZDAyYzhjY2RhNjE1NWY1MTg2YWRjMDk0NzVjMzc2OWRiMjBlNmJkYjg0ZWU2ODQ2OCJ9fX0="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODZjNjNlY2YwYWE0ODNmN2U4Mzc5MjA1ZDAwNmIwZDdlOGU3NWMzOTUyMjk0NjBjYzNiNGVhZDhjMTNjMjNiNiJ9fX0="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYzBhODE0MjZjODcxNDAxYjRmZTJhZTFhNjM3NmQ1ZjY0NGQ4NWVmOTJhNzA1YmYyNDI5MWY3Njg0MjNkMmVkMiJ9fX0="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjRmMTkzMzk0ZGQzMDRlNzI3MDM3MTUzNDkzZmM3YjI1NTJiZTAwZTU4MWZmNGIyNjI3MDE2N2NlODhlZmQ1MCJ9fX0="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvN2RlMjE4MWU1ZWNkOWUzYzAzODMwMzkzODVlMmQyYjlkNTFkZTIxMmNiZTc4YWYyM2UwYTVhYjU0NjYyOWYxNiJ9fX0="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYTJjZTliNDJjYjFmNjY0ZDAyYzhjY2RhNjE1NWY1MTg2YWRjMDk0NzVjMzc2OWRiMjBlNmJkYjg0ZWU2ODQ2OCJ9fX0="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZjdhNTRhM2FhY2FhMjQwMWRjMGYxMTdlYmIzNWI0NmRlOGZiM2Y1ZDM0Mjc3NDlhOGZhZmE0OGRjNDI0NWY1MiJ9fX0="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvODdiODg2YjJhZTVmN2Y3NzQ2ODNiZGY2NDI2N2MzMDEzODhkN2Q2OWMxZmJhOTkzODQwYzMxZjg1YzdhY2EyNyJ9fX0="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvYjY2YjhlZmFmY2UxMzM2YmRkMWNjNDM2NzFiMWFjYmIwZjMzY2Y1NDE4YmYxM2JhOTIxNGQ2Y2RjZWMwMWUxOSJ9fX0="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDdlYWM5NWVjNmQzYjE4YzVmZWU3NmNiYTdmZjJmYzViZjM0OGI3YmUzYzBmOTRiOTliYjljMjg1NjkxOGI4NCJ9fX0="
+  - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWUxMGEzZjFhOTYzZTNjZjI0NGYwNzA2N2RhOWZmNmU3NTA5OTY0NTBlYTg2OTAxMDgzY2E0OTNjNWU4YzI3MiJ9fX0="
+
+# MULAH
+slots:
+  COAL: 1250
+  IRON_INGOT: 1500
+  LAPIS_LAZULI: 2000
+  EMERALD: 4000
+  DIAMOND: 10000
+
+# MACHINES
+machines:
