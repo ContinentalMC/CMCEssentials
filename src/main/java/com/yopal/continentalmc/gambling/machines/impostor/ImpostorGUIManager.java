@@ -1,6 +1,6 @@
-package com.yopal.continentalmc.gambling.machines.impostor.managers;
+package com.yopal.continentalmc.gambling.machines.impostor;
 
-import com.yopal.continentalmc.gambling.machines.impostor.instances.ImpostorGUI;
+import com.yopal.continentalmc.gambling.machines.impostor.ImpostorGUI;
 
 import java.util.HashMap;
 import java.util.UUID;

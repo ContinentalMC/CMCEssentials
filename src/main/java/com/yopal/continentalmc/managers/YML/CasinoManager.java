@@ -135,6 +135,11 @@ public class CasinoManager {
         saveFile(cmc);
     }
 
+    public static void setLoc(CMCEssentials cmc, int pointNum, Location loc) {
+        casinoYML.set("bingoCuboid.loc" + pointNum, loc);
+        saveFile(cmc);
+    }
+
     public static ArrayList<UUID> getArmorStandUUIDs(String name) {
         String startPath = "machines." + name + ".armorStands.";
 
@@ -147,6 +152,18 @@ public class CasinoManager {
         return uuids;
     }
 
+    public static void resetBingoTotal(CMCEssentials cmc) {
+        casinoYML.set("bingoTotal", 0);
+        saveFile(cmc);
+    }
+
+    public static void addOnBingoTotal(CMCEssentials cmc, int amount) {
+        casinoYML.set("bingoTotal", casinoYML.getInt("bingoTotal") + amount);
+        saveFile(cmc);
+    }
+
+
+
     public static void removeMachine(CMCEssentials cmc, String string) {
         casinoYML.set("machines." + string, null);
         saveFile(cmc);
@@ -155,6 +172,25 @@ public class CasinoManager {
     public static int getSlotWinning(Material material) {
         return casinoYML.getInt("slots." + material);
     }
+    public static int getImpostorWinning(String winType) { return casinoYML.getInt("impostor." + winType); }
+    public static int getHorseBetWinning() { return casinoYML.getInt("horseBet"); }
+    public static int getPlatformsWinning() { return casinoYML.getInt("platforms"); }
+    public static int getRPSWinPercentageDowngrade() { return casinoYML.getInt("rpsWinPercentageDowngrade"); }
+    public static int getRPSWinPercentageIncorrectDowngrade() { return casinoYML.getInt("rpsWinPercentageDowngrade"); }
+    public static int getPercentageCut() { return casinoYML.getInt("bingoCut"); }
+    public static int getBingoMaxOut() { return casinoYML.getInt("bingoMaxOut"); }
+    public static int getBingoTotal() { return casinoYML.getInt("bingoTotal"); }
+    public static List<Material> getBingoMaterials() {
+        List<Material> materials = new ArrayList<>();
+        for (String string : casinoYML.getStringList("bingoMaterials")) {
+            materials.add(Material.valueOf(string));
+        }
+
+        return materials;
+    }
+
+    public static Location getLoc1() { return casinoYML.getLocation("bingoCuboid.loc1"); }
+    public static Location getLoc2() { return casinoYML.getLocation("bingoCuboid.loc2"); }
 
 
     // setters

@@ -44,7 +44,6 @@ public class HenryGUI {
                 clickToBuyOne,
                 ChatColor.GRAY + "Cost: $" + coinPrices.get("good-coin"),
                 ChatColor.GRAY + "Machines Allowed:",
-                ChatColor.GRAY + " ■ Diamond Cutting Perfection",
                 ChatColor.GRAY + " ■ Impostor"
         ), 12);
 
@@ -52,7 +51,7 @@ public class HenryGUI {
                 clickToBuyOne,
                 ChatColor.GRAY + "Cost: $" + coinPrices.get("special-coin"),
                 ChatColor.GRAY + "Machines Allowed:",
-                ChatColor.GRAY + " ■ Minecart Bet",
+                ChatColor.GRAY + " ■ Horse Bet",
                 ChatColor.GRAY + " ■ Platforms"
         ), 14);
 

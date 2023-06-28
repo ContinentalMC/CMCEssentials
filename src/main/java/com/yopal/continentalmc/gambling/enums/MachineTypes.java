@@ -4,8 +4,7 @@ public enum MachineTypes {
     SLOTS,
     ROCKPAPERSCISSORS,
     IMPOSTOR,
-    DIAMONDCUTTINGPERFECTION,
-    MINECARTBET,
+    HORSEBET,
     PLATFORMS
 
 }

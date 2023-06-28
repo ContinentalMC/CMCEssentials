@@ -57,10 +57,9 @@ public class MachineCreationManager {
        switch (type) {
            case SLOTS:
                return "BASIC";
-           case DIAMONDCUTTINGPERFECTION:
            case IMPOSTOR:
                return "GOOD";
-           case MINECARTBET:
+           case HORSEBET:
            case PLATFORMS:
                return "SPECIAL";
            case ROCKPAPERSCISSORS:

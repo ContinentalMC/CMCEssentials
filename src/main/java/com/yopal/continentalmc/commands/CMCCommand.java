@@ -149,6 +149,25 @@ public class CMCCommand implements CommandExecutor {
             PlayerInteract.sendLackPermission(player, "cmc.user.getScore");
         }
 
+        if (args[0].equalsIgnoreCase("setCuboidPoint1") && player.hasPermission("cmc.admin.setCuboid")) {
+
+            CasinoManager.setLoc(cmc, 1, player.getTargetBlock(null, 5).getLocation());
+
+            PlayerInteract.sendMessage(player, ChatColor.GREEN + "Successful!");
+
+        } else if (args[0].equalsIgnoreCase("getScore") && !player.hasPermission("cmc.admin.setCuboid")) {
+            PlayerInteract.sendLackPermission(player, "cmc.admin.setCuboid");
+        }
+
+        if (args[0].equalsIgnoreCase("setCuboidPoint2") && player.hasPermission("cmc.admin.setCuboid")) {
+
+            CasinoManager.setLoc(cmc, 2, player.getTargetBlock(null, 5).getLocation());
+
+            PlayerInteract.sendMessage(player, ChatColor.GREEN + "Successful!");
+
+        } else if (args[0].equalsIgnoreCase("getScore") && !player.hasPermission("cmc.admin.setCuboid")) {
+            PlayerInteract.sendLackPermission(player, "cmc.admin.setCuboid");
+        }
         return false;
     }
 }

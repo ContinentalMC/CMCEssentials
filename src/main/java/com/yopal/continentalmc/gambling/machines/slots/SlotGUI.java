@@ -1,4 +1,4 @@
-package com.yopal.continentalmc.gambling.machines.slots.instances;
+package com.yopal.continentalmc.gambling.machines.slots;
 
 import com.yopal.continentalmc.CMCEssentials;
 import com.yopal.continentalmc.gambling.managers.CelebrationManager;
@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,6 +22,7 @@ public class SlotGUI {
     private CMCEssentials cmc;
     private Player player;
     private int winPercentage;
+    private boolean isRolling;
     private List<Material> materialList = Arrays.asList(
             Material.COAL,
             Material.IRON_INGOT,
@@ -28,6 +30,12 @@ public class SlotGUI {
             Material.EMERALD,
             Material.DIAMOND
     );
+
+    private BukkitTask task1;
+    private BukkitTask task2;
+    private BukkitTask task3;
+    private BukkitTask task4;
+    private BukkitTask soundTask;
 
     public SlotGUI(CMCEssentials cmc, Player player, int winPercentage){
         this.cmc = cmc;
@@ -95,7 +103,7 @@ public class SlotGUI {
 
     private boolean getWin() {
         Random random = new Random();
-        int winNum = random.nextInt(101);
+        int winNum = random.nextInt(1, 101);
 
         if (winNum <= winPercentage) {
             return true;
@@ -105,6 +113,7 @@ public class SlotGUI {
     }
 
     public void openMainPage() {
+        isRolling = true;
         Inventory inv = Bukkit.createInventory(player, 27, PlayerInteract.returnPrefix() + "Slot Machine");
         PageUtil.createRainbowFrames(cmc, inv, 0, 26);
 
@@ -132,22 +141,33 @@ public class SlotGUI {
 
         player.openInventory(inv);
 
-        Bukkit.getScheduler().runTaskLaterAsynchronously(cmc, ()->{
+        // sound task
+        soundTask = Bukkit.getScheduler().runTaskLater(cmc, ()->{
+            player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1.5f);
+        }, 90);
+
+        Bukkit.getScheduler().runTaskLater(cmc, ()->{
+            soundTask.cancel();
+        }, 90);
+
+        task1 = Bukkit.getScheduler().runTaskLater(cmc, ()->{
             inv.setItem(12, new ItemStack(materials.get(0)));
             player.playSound(player.getLocation(), Sound.BLOCK_PISTON_EXTEND, 1, 1.25f);
         }, 20);
 
-        Bukkit.getScheduler().runTaskLaterAsynchronously(cmc, ()->{
+        task2 = Bukkit.getScheduler().runTaskLater(cmc, ()->{
             inv.setItem(13, new ItemStack(materials.get(1)));
             player.playSound(player.getLocation(), Sound.BLOCK_PISTON_EXTEND, 1, 1.25f);
         }, 55);
 
-        Bukkit.getScheduler().runTaskLaterAsynchronously(cmc, ()->{
+        task3 = Bukkit.getScheduler().runTaskLater(cmc, ()->{
             inv.setItem(14, new ItemStack(materials.get(2)));
             player.playSound(player.getLocation(), Sound.BLOCK_PISTON_EXTEND, 1, 1.25f);
         }, 90);
 
-        Bukkit.getScheduler().runTaskLater(cmc, ()-> {
+        task4 = Bukkit.getScheduler().runTaskLater(cmc, ()-> {
+
+            isRolling = false;
 
             if (checkHasToken()) {
                 PageUtil.updateDisplayName(inv, 17, ChatColor.GREEN + ChatColor.BOLD.toString() + "RE-ROLL");
@@ -224,7 +244,16 @@ public class SlotGUI {
         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1, 1);
         econ.depositPlayer(player, CasinoManager.getSlotWinning(materials.get(0)));
     }
+    public boolean getIsRolling() {
+        return isRolling;
+    }
 
-
+    public void cancelAllTasks() {
+        task1.cancel();
+        task2.cancel();
+        task3.cancel();
+        task4.cancel();
+        soundTask.cancel();
+    }
 
 }

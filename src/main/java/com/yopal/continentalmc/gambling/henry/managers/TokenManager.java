@@ -38,7 +38,6 @@ public class TokenManager {
 
         itemMeta.setLore(Arrays.asList(
                 ChatColor.GRAY + "Level >> GOOD",
-                ChatColor.GRAY + " ■ Diamond Cutting Perfection",
                 ChatColor.GRAY + " ■ Impostor"
         ));
         itemMeta.getPersistentDataContainer().set(new NamespacedKey(cmc, "tokenType"), PersistentDataType.STRING, "good");
@@ -55,7 +54,7 @@ public class TokenManager {
         itemMeta.setLore(Arrays.asList(
                 ChatColor.GRAY + "Level >> SPECIAL",
                 ChatColor.GRAY + "Machines Allowed:",
-                ChatColor.GRAY + " ■ Minecart Bet",
+                ChatColor.GRAY + " ■ Horse Bet",
                 ChatColor.GRAY + " ■ Platforms"
         ));
         itemMeta.getPersistentDataContainer().set(new NamespacedKey(cmc, "tokenType"), PersistentDataType.STRING, "special");

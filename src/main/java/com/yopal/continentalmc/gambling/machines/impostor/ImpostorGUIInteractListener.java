@@ -1,10 +1,8 @@
-package com.yopal.continentalmc.gambling.machines.slots.listeners;
+package com.yopal.continentalmc.gambling.machines.impostor;
 
 import com.yopal.continentalmc.CMCEssentials;
 import com.yopal.continentalmc.gambling.enums.MachineTypes;
 import com.yopal.continentalmc.gambling.machines.managers.MachineGUIManager;
-import com.yopal.continentalmc.gambling.machines.slots.instances.SlotGUI;
-import com.yopal.continentalmc.gambling.machines.slots.managers.SlotGUIManager;
 import com.yopal.continentalmc.managers.YML.CasinoManager;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -19,13 +17,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
-public class SlotGUIInteractListener implements Listener {
-
+public class ImpostorGUIInteractListener implements Listener {
     private CMCEssentials cmc;
 
-    public SlotGUIInteractListener(CMCEssentials cmc) {
+    public ImpostorGUIInteractListener(CMCEssentials cmc) {
         this.cmc = cmc;
     }
 
@@ -35,14 +33,13 @@ public class SlotGUIInteractListener implements Listener {
         HashMap<UUID, Location> machinesInUse = MachineGUIManager.getMachinesInUse();
         UUID uuid = e.getWhoClicked().getUniqueId();
 
-
         if (!machinesInUse.containsKey(uuid)) {
             return;
         }
 
         Block block = machinesInUse.get(uuid).getBlock();
 
-        if (!CasinoManager.getMachineType(block).equals(MachineTypes.SLOTS)) {
+        if (!CasinoManager.getMachineType(block).equals(MachineTypes.IMPOSTOR)) {
             return;
         }
 
@@ -51,19 +48,54 @@ public class SlotGUIInteractListener implements Listener {
         switch (e.getSlot()) {
             case 9:
                 Bukkit.getPlayer(uuid).closeInventory();
-                break;
+                return;
             case 17:
                 ItemStack head = e.getInventory().getItem(e.getSlot());
-                String headName = head.getItemMeta().getDisplayName();
-                if (headName.contains(ChatColor.RED.toString())) {
-                    break;
+                List<String> headLore = head.getItemMeta().getLore();
+
+                if (headLore.get(0).contains(ChatColor.RED.toString())) {
+                    return;
                 }
 
-                SlotGUIManager.addGUI(e.getWhoClicked().getUniqueId(), new SlotGUI(cmc, (Player) e.getWhoClicked(), CasinoManager.getWinPercentage(block)));
+                ImpostorGUIManager.addGUI(e.getWhoClicked().getUniqueId() , new ImpostorGUI(cmc, (Player) e.getWhoClicked(), CasinoManager.getWinPercentage(block)));
                 MachineGUIManager.addMachineInUse(e.getWhoClicked().getUniqueId(), block.getLocation());
 
                 removeToken((Player) e.getWhoClicked());
+                return;
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+
+                head = e.getInventory().getItem(17);
+                headLore = head.getItemMeta().getLore();
+                if (headLore.get(0).contains(ChatColor.GREEN.toString())) {
+                    return;
+                } else if (headLore.get(0).contains(ChatColor.RED + "You need a GOOD token to play again!")) {
+                    return;
+                }
+
                 break;
+            default:
+                return;
+        }
+
+        ImpostorGUI impostorGUI = ImpostorGUIManager.getGUI(uuid);
+
+        boolean regularWin = impostorGUI.checkWin();
+        boolean goldenWin = false;
+
+        if (regularWin) {
+            goldenWin = impostorGUI.checkGoldenWin();
+        }
+
+        if (goldenWin) {
+            impostorGUI.setGoldenWinning(e.getSlot());
+        } else if (regularWin) {
+            impostorGUI.setWinning(e.getSlot());
+        } else {
+            impostorGUI.setLosing(e.getSlot());
         }
 
     }

@@ -41,7 +41,7 @@ public class PlayerJoinListener implements Listener {
             WBManager.addPlayerWB(new PlayerWB(e.getPlayer().getUniqueId(), player.getUniqueId()));
         }
 
-        Bukkit.getScheduler().runTaskLaterAsynchronously(cmc, ()->{
+        Bukkit.getScheduler().runTaskLater(cmc, ()->{
             WBManager.removePlayerThatJoined(e.getPlayer());
         }, 200);
 

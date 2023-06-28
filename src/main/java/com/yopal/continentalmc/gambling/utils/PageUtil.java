@@ -3,6 +3,7 @@ package com.yopal.continentalmc.gambling.utils;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import com.yopal.continentalmc.CMCEssentials;
+import com.yopal.continentalmc.gambling.enums.MachineTypes;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -55,14 +56,12 @@ public class PageUtil {
 
         Random random = new Random();
 
-        BukkitTask cycleTask = Bukkit.getScheduler().runTaskTimerAsynchronously(cmc, ()->{
+        BukkitTask cycleTask = Bukkit.getScheduler().runTaskTimer(cmc, ()->{
             // reordering frames
             inv.setItem(slot, new ItemStack(materialList.get(random.nextInt(materialList.size()))));
-            player.playSound(player.getLocation(), Sound.UI_BUTTON_CLICK, 1, 1.5f);
-
         }, 0, 2);
 
-        Bukkit.getScheduler().runTaskLaterAsynchronously(cmc, ()->{
+        Bukkit.getScheduler().runTaskLater(cmc, ()->{
             cycleTask.cancel();
         }, ticksLast);
 
@@ -89,7 +88,7 @@ public class PageUtil {
                 Material.YELLOW_STAINED_GLASS_PANE
         );
 
-        BukkitTask rainbowTask = Bukkit.getScheduler().runTaskTimerAsynchronously(cmc, ()->{
+        BukkitTask rainbowTask = Bukkit.getScheduler().runTaskTimer(cmc, ()->{
             // reordering frames
             Collections.rotate(rainbowFrames, 1);
 
@@ -111,7 +110,7 @@ public class PageUtil {
 
         }, 0, 3);
 
-        Bukkit.getScheduler().runTaskLaterAsynchronously(cmc, ()->{
+        Bukkit.getScheduler().runTaskLater(cmc, ()->{
             rainbowTask.cancel();
         }, 130);
 
@@ -175,19 +174,19 @@ public class PageUtil {
      * @param inv
      * @param player
      * @param slot
+     * @param lore
      */
-    public static void setPlayerSkull(Inventory inv, OfflinePlayer player, int slot) {
+    public static ItemStack setPlayerSkull(Inventory inv, OfflinePlayer player, int slot, List<String> lore) {
         ItemStack itemStack = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
         skullMeta.setOwningPlayer(player);
-        skullMeta.setDisplayName(ChatColor.DARK_GRAY + player.getName());
-        skullMeta.setLore(Arrays.asList(
-                ChatColor.GRAY + "The Receiver of the Gift!",
-                ChatColor.GRAY + "Current Status: Unknown"
-        ));
+        skullMeta.setDisplayName(ChatColor.YELLOW + player.getName());
+        skullMeta.setLore(lore);
+
         itemStack.setItemMeta(skullMeta);
 
         inv.setItem(slot, itemStack);
+        return itemStack;
     }
 
     /**

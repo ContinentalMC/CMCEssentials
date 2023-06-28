@@ -1,6 +1,7 @@
 package com.yopal.continentalmc.gambling.managers;
 
 import com.yopal.continentalmc.CMCEssentials;
+import com.yopal.continentalmc.gambling.enums.MachineTypes;
 import org.bukkit.*;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -37,6 +38,21 @@ public class CelebrationManager {
                 fireworkMeta.addEffect(builder.withColor(Color.BLACK).build());
                 break;
         }
+        firework.setFireworkMeta(fireworkMeta);
+        firework.detonate();
+    }
+
+    public static void summonFirework(UUID playerUUID, Color color, CMCEssentials cmc, MachineTypes type) {
+        Player player = Bukkit.getPlayer(playerUUID);
+        Firework firework = player.getWorld().spawn(player.getLocation(), Firework.class);
+        FireworkMeta fireworkMeta = firework.getFireworkMeta();
+
+        firework.getPersistentDataContainer().set(new NamespacedKey(cmc, "fireworkMachine"), PersistentDataType.STRING, type.toString().toLowerCase());
+
+        FireworkEffect.Builder builder = FireworkEffect.builder().withFlicker().withFade().with(FireworkEffect.Type.STAR);
+
+        fireworkMeta.addEffect(builder.withColor(color).build());
+
         firework.setFireworkMeta(fireworkMeta);
         firework.detonate();
     }

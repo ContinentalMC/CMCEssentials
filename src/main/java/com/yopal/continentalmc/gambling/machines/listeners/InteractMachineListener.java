@@ -2,16 +2,22 @@ package com.yopal.continentalmc.gambling.machines.listeners;
 
 import com.yopal.continentalmc.CMCEssentials;
 import com.yopal.continentalmc.gambling.enums.MachineTypes;
-import com.yopal.continentalmc.gambling.machines.impostor.instances.ImpostorGUI;
-import com.yopal.continentalmc.gambling.machines.impostor.managers.ImpostorGUIManager;
+import com.yopal.continentalmc.gambling.machines.horsebet.HorseBetGUI;
+import com.yopal.continentalmc.gambling.machines.horsebet.HorseBetGUIManager;
+import com.yopal.continentalmc.gambling.machines.impostor.ImpostorGUI;
+import com.yopal.continentalmc.gambling.machines.impostor.ImpostorGUIManager;
 import com.yopal.continentalmc.gambling.machines.managers.MachineGUIManager;
-import com.yopal.continentalmc.gambling.machines.slots.instances.SlotGUI;
-import com.yopal.continentalmc.gambling.machines.slots.managers.SlotGUIManager;
+import com.yopal.continentalmc.gambling.machines.platforms.PlatformsGUI;
+import com.yopal.continentalmc.gambling.machines.platforms.PlatformsGUIManager;
+import com.yopal.continentalmc.gambling.machines.rockpaperscissors.RPSGUI;
+import com.yopal.continentalmc.gambling.machines.rockpaperscissors.RPSGUIManager;
+import com.yopal.continentalmc.gambling.machines.slots.SlotGUI;
+import com.yopal.continentalmc.gambling.machines.slots.SlotGUIManager;
 import com.yopal.continentalmc.managers.YML.CasinoManager;
 import com.yopal.continentalmc.utils.PlayerInteract;
+import jdk.tools.jlink.internal.Platform;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -77,6 +83,42 @@ public class InteractMachineListener implements Listener {
                 ImpostorGUIManager.addGUI(e.getPlayer().getUniqueId() , new ImpostorGUI(cmc, e.getPlayer(), CasinoManager.getWinPercentage(e.getClickedBlock())));
                 e.getItem().setAmount(e.getItem().getAmount() - 1);
                 MachineGUIManager.addMachineInUse(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
+                break;
+
+            case HORSEBET:
+                if (!tokenType.equalsIgnoreCase("special")) {
+                    PlayerInteract.sendInvalidUsage(e.getPlayer(), "You must have a SPECIAL token.");
+                    return;
+                }
+
+                HorseBetGUIManager.addGUI(e.getPlayer().getUniqueId() , new HorseBetGUI(cmc, e.getPlayer(), CasinoManager.getWinPercentage(e.getClickedBlock())));
+                e.getItem().setAmount(e.getItem().getAmount() - 1);
+                MachineGUIManager.addMachineInUse(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
+                break;
+
+            case PLATFORMS:
+                if (!tokenType.equalsIgnoreCase("special")) {
+                    PlayerInteract.sendInvalidUsage(e.getPlayer(), "You must have a SPECIAL token.");
+                    return;
+                }
+
+                PlatformsGUIManager.addGUI(e.getPlayer().getUniqueId() , new PlatformsGUI(cmc, e.getPlayer(), CasinoManager.getWinPercentage(e.getClickedBlock())));
+                e.getItem().setAmount(e.getItem().getAmount() - 1);
+                MachineGUIManager.addMachineInUse(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
+                break;
+            case ROCKPAPERSCISSORS:
+                if (!tokenType.equalsIgnoreCase("insane")) {
+                    PlayerInteract.sendInvalidUsage(e.getPlayer(), "You must have an INSANE token.");
+                    return;
+                }
+
+                RPSGUI rpsGUI = new RPSGUI(cmc, e.getPlayer(), CasinoManager.getWinPercentage(e.getClickedBlock()), 25000, 1);
+
+                RPSGUIManager.addGUI(e.getPlayer().getUniqueId() , rpsGUI);
+                e.getItem().setAmount(e.getItem().getAmount() - 1);
+                MachineGUIManager.addMachineInUse(e.getPlayer().getUniqueId(), e.getClickedBlock().getLocation());
+
+                rpsGUI.startAction();
                 break;
         }
 

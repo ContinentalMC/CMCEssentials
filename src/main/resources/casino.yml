@@ -2,8 +2,8 @@
 coins:
   basic-coin: 1000
   good-coin: 5000
-  special-coin: 10000
-  insane-coin: 25000
+  special-coin: 7500
+  insane-coin: 10000
 
 # HENRY WELCOME MESSAGES
 henryWelcomes:
@@ -123,6 +123,10 @@ villagerTextures:
   - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZDdlYWM5NWVjNmQzYjE4YzVmZWU3NmNiYTdmZjJmYzViZjM0OGI3YmUzYzBmOTRiOTliYjljMjg1NjkxOGI4NCJ9fX0="
   - "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMWUxMGEzZjFhOTYzZTNjZjI0NGYwNzA2N2RhOWZmNmU3NTA5OTY0NTBlYTg2OTAxMDgzY2E0OTNjNWU4YzI3MiJ9fX0="
 
+rpsWinPercentageDowngrade: 10
+rpsWinPercentageIncorrectDowngrade: 40
+
+
 # MULAH
 slots:
   COAL: 1250
@@ -130,6 +134,40 @@ slots:
   LAPIS_LAZULI: 2000
   EMERALD: 4000
   DIAMOND: 10000
+impostor:
+  REGULAR: 7500
+  GOLDEN: 10000
+horseBet: 10000
+platforms: 12500
+rockPaperScissors: 500
+
+bingoMaxOut: 50000
+bingoTotal: 0
+bingoCut: 10
+bingoMaterials:
+  - BREAD
+  - BOWL
+  - BOW
+  - BUCKET
+  - CACTUS
+  - CAKE
+  - EGG
+  - ELYTRA
+  - DROPPER
+  - DRAGON_EGG
+  - EMERALD_ORE
+  - IRON_SWORD
+  - ITEM_FRAME
+  - JUKEBOX
+  - MELON
+  - NAME_TAG
+  - RABBIT_STEW
+  - QUARTZ_ORE
+  - STONE
+  - STONE_HOE
+  - WOOL
+  - BAMBOO
+  - BARREL
 
 # MACHINES
 machines:
