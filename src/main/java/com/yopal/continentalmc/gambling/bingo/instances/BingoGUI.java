@@ -101,11 +101,32 @@ public class BingoGUI {
             if (inv.getItem(invSlot).getItemMeta().getDisplayName().contains(ChatColor.GREEN.toString())) {
                 possibleWins.add(invSlot);
             }
-
         }
 
+        // ROWS
+        for (int invSlot : Arrays.asList(21, 22, 23, 30, 31, 32, 39, 40, 41)) {
+            if (possibleWins.contains(invSlot) && possibleWins.contains(invSlot + 1) && possibleWins.contains(invSlot + 2)) {
+                return true;
+            }
+        }
 
+        // COLUMNS
+        for (int invSlot : Arrays.asList(21, 22, 23, 30, 31, 32, 39, 40, 41)) {
+            if (possibleWins.contains(invSlot) && possibleWins.contains(invSlot + 9) && possibleWins.contains(invSlot + 18)) {
+                return true;
+            }
+        }
 
+        // DIAGONALS
+        if (possibleWins.contains(21) && possibleWins.contains(31) && possibleWins.contains(41)) {
+            return true;
+        }
+
+        if (possibleWins.contains(23) && possibleWins.contains(31) && possibleWins.contains(39)) {
+            return true;
+        }
+
+        return false;
 
     }
 
