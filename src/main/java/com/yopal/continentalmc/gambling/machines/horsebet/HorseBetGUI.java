@@ -189,6 +189,7 @@ public class HorseBetGUI {
         if (win) {
             Economy econ = CMCEssentials.getEconomy();
             econ.depositPlayer(player, CasinoManager.getHorseBetWinning());
+            PlayerInteract.sendMessage(player, ChatColor.GREEN + "$" + CasinoManager.getHorseBetWinning() + " has been added to your balance!");
 
             player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1, 1);
             player.sendMessage(PlayerInteract.returnPrefix() + ChatColor.GOLD + ChatColor.BOLD + "Henry: " + ChatColor.GRAY + "I see you got a good eye! Wanna play again?");

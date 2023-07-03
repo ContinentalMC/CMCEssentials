@@ -20,7 +20,7 @@ public class BingoGUI {
 
     private Inventory inv;
     private Player player;
-    private List<Material> materials;
+    private List<Material> materials = new ArrayList<>();
 
     public BingoGUI(Player player) {
         this.player = player;
@@ -38,7 +38,7 @@ public class BingoGUI {
         PageUtil.createFrames(inv, frame, 0, 53);
 
         // PLAYER SKULL
-        PageUtil.setPlayerSkull(inv, player, 25, Arrays.asList("I have to remember to click the confirm head if I get bingo!"));
+        PageUtil.setPlayerSkull(inv, player, 25, Arrays.asList(ChatColor.GRAY + "I have to remember to click the", ChatColor.GRAY + "confirm head if I get bingo!"));
 
         // CLOSE
         PageUtil.setItem(inv, ChatColor.RED + ChatColor.BOLD.toString() + "CLOSE", Material.BARRIER, Arrays.asList(
@@ -47,37 +47,45 @@ public class BingoGUI {
 
         // GREEN CHECK HEAD
         PageUtil.setCustomSkull(inv, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZWUyOGJlYTlkMzkzNzNkMzZlZThmYTQwZWM4M2Y5YzNmY2RkOTMxNzUyMjc3NDNmOWRkMWY3ZTc4ODZiN2VlNSJ9fX0=", 28);
-        PageUtil.updateDisplayName(inv, 28, ChatColor.RED + ChatColor.BOLD.toString() + "CONFIRM");
+        PageUtil.updateDisplayName(inv, 28, ChatColor.GOLD + ChatColor.BOLD.toString() + "CONFIRM");
         PageUtil.updateLore(inv, 28, Arrays.asList(
                 ChatColor.GREEN + ChatColor.BOLD.toString() + "[CLICK] " + ChatColor.GRAY + "To take your winnings!"
         ));
 
         // MONEY BAG
         PageUtil.setCustomSkull(inv, "eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMjA5Mjk5YTExN2JlZTg4ZDMyNjJmNmFiOTgyMTFmYmEzNDRlY2FlMzliNDdlYzg0ODEyOTcwNmRlZGM4MWU0ZiJ9fX0=", 19);
-        PageUtil.updateDisplayName(inv, 19, ChatColor.GOLD + ChatColor.BOLD.toString() + "TOTAL MONEY");
+        PageUtil.updateDisplayName(inv, 19, ChatColor.GOLD + ChatColor.BOLD.toString() + "TOTAL POOL");
         PageUtil.updateLore(inv, 19, Arrays.asList(ChatColor.GRAY.toString() + CasinoManager.getBingoTotal()));
 
         // SLOT
-        PageUtil.setItem(inv, ChatColor.YELLOW + ChatColor.BOLD.toString() + "CURRENT ITEM", BingoGUIManager.getRandMaterial(), Arrays.asList(ChatColor.GRAY + "See if you have this item!"), 13);
+        Material currentMat = BingoGUIManager.getRandMaterial();
+        if (currentMat == null) {
+            PlayerInteract.sendMessage(player, "Please wait a bit to right click for Henry to choose a random material!");
+            return;
+        } else {
+            PageUtil.setItem(inv, ChatColor.YELLOW + ChatColor.BOLD.toString() + "CURRENT ITEM", currentMat, Arrays.asList(ChatColor.GRAY + "See if you have this item!"), 13);
+            materials.add(currentMat);
+        }
 
         // BLOCKS
         Random random = new Random();
-        List<Material> materials = new ArrayList<>();
-        while (materials.size() != 9) {
+        List<Material> randomMaterials = new ArrayList<>();
+        while (randomMaterials.size() != 9) {
             Material material = CasinoManager.getBingoMaterials().get(random.nextInt(CasinoManager.getBingoMaterials().size()));
 
-            if (materials.contains(material)) {
+            if (randomMaterials.contains(material)) {
                 continue;
             }
 
-            materials.add(material);
+            randomMaterials.add(material);
         }
 
         int indexNum = 0;
         for (int invSlot : Arrays.asList(21, 22, 23, 30, 31, 32, 39, 40, 41)) {
-            PageUtil.setItem(inv, ChatColor.RED + ChatColor.BOLD.toString() + materials.get(indexNum).toString(), materials.get(indexNum), Arrays.asList(
+            PageUtil.setItem(inv, ChatColor.RED + ChatColor.BOLD.toString() + randomMaterials.get(indexNum).toString().replace("_", " "), randomMaterials.get(indexNum), Arrays.asList(
                     ChatColor.GREEN + ChatColor.BOLD.toString() + "[CLICK] " + ChatColor.GRAY + "To acknowledge this item!"
             ), invSlot);
+            indexNum++;
         }
 
         player.openInventory(inv);
@@ -130,8 +138,14 @@ public class BingoGUI {
 
     }
 
+    public void updatePool() {
+        PageUtil.updateLore(inv, 19, Arrays.asList(ChatColor.GRAY.toString() + CasinoManager.getBingoTotal()));
+    }
+
     public List<Material> getMaterials() { return materials; }
 
     public Inventory getInv() { return inv; }
+
+    public Player getPlayer() { return player; }
 
 }

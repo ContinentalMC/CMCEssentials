@@ -2,6 +2,8 @@ package com.yopal.continentalmc;
 
 import com.yopal.continentalmc.commands.CMCCommand;
 import com.yopal.continentalmc.commands.CMCTabCompleter;
+import com.yopal.continentalmc.gambling.bingo.listeners.BingoGUIListener;
+import com.yopal.continentalmc.gambling.bingo.managers.BingoGUIManager;
 import com.yopal.continentalmc.gambling.henry.listeners.PlayerCloseHenryListener;
 import com.yopal.continentalmc.gambling.henry.listeners.PlayerInteractHenryListener;
 import com.yopal.continentalmc.gambling.henry.listeners.TokenBuyListener;
@@ -24,6 +26,7 @@ import com.yopal.continentalmc.managers.YML.EmojiManager;
 import com.yopal.continentalmc.managers.YML.ScoreManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -70,12 +73,17 @@ public final class CMCEssentials extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new HorseBetGUIInteractListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlatformsGUIInteractListener(this), this);
         Bukkit.getPluginManager().registerEvents(new RPSGUIInteractListener(this), this);
+        Bukkit.getPluginManager().registerEvents(new BingoGUIListener(this), this);
 
         if (!setupEconomy() ) {
             getLogger().severe(String.format("Disabled due to no Vault dependency found!"));
             getServer().getPluginManager().disablePlugin(this);
         } else {
             getLogger().info("Vault dependency found!");
+        }
+
+        if (CasinoManager.getBingoTotal() >= CasinoManager.getBingoMaxOut()) {
+            BingoGUIManager.startBingo(this);
         }
 
     }

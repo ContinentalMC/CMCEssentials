@@ -8,17 +8,15 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
 
 public class BingoGUIManager {
 
     private static BukkitTask task;
 
     private static Material currentMaterial;
-    private static List<BingoGUI> bingoGUIList;
+
+    private static boolean isRolling = false;
 
     private static HashMap<UUID, BingoGUI> guiMap = new HashMap<>();
 
@@ -29,18 +27,31 @@ public class BingoGUIManager {
     public static BingoGUI getGUI(UUID uuid) { return guiMap.get(uuid); }
 
     public static void startBingo(CMCEssentials cmc) {
+        if (isRolling) {
+            return;
+        }
+
         Random random = new Random();
 
         task = Bukkit.getScheduler().runTaskTimer(cmc, ()->{
             currentMaterial = CasinoManager.getBingoMaterials().get(random.nextInt(CasinoManager.getBingoMaterials().size()));
 
-            for (BingoGUI bingoGUI : bingoGUIList) {
+            for (BingoGUI bingoGUI : guiMap.values()) {
                 bingoGUI.updateMaterial();
             }
-        }, 60, 200);
+        }, 60, 100);
+
+        isRolling = true;
 
     }
 
+    public static void stopBingo() {
+        isRolling = false;
+        task.cancel();
+        currentMaterial = null;
+    }
     public static Material getRandMaterial() { return currentMaterial; }
+
+    public static Collection<BingoGUI> getGUIS() { return guiMap.values(); }
 
 }

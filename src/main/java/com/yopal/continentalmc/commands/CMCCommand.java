@@ -16,6 +16,8 @@ import org.bukkit.block.Block;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import java.util.UUID;
@@ -167,6 +169,30 @@ public class CMCCommand implements CommandExecutor {
 
         } else if (args[0].equalsIgnoreCase("getScore") && !player.hasPermission("cmc.admin.setCuboid")) {
             PlayerInteract.sendLackPermission(player, "cmc.admin.setCuboid");
+        }
+
+        if (args[0].equalsIgnoreCase("setBingoStand") && player.hasPermission("cmc.admin.setBingoStand")) {
+
+            Block targetBlock = player.getTargetBlockExact(5);
+
+            if (targetBlock == null) {
+                PlayerInteract.sendInvalidUsage(player, "You need to look at a block!");
+                return false;
+            }
+
+            ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(targetBlock.getLocation().add(0.5, 1, 0.5), EntityType.ARMOR_STAND);
+            armorStand.setInvulnerable(true);
+            armorStand.setSmall(true);
+            armorStand.setVisible(false);
+            armorStand.setCustomName(ChatColor.GREEN + ChatColor.BOLD.toString() + "TOTAL POOL: " + CasinoManager.getBingoTotal());
+            armorStand.setCustomNameVisible(true);
+            armorStand.setGravity(false);
+
+            CasinoManager.setBingoStand(cmc, armorStand);
+
+            PlayerInteract.sendMessage(player, "Bingo stand set successfully!");
+        } else if (args[0].equalsIgnoreCase("setBingoStand") && !player.hasPermission("cmc.admin.setBingoStand")) {
+            PlayerInteract.sendLackPermission(player, "cmc.admin.setBingoStand");
         }
         return false;
     }

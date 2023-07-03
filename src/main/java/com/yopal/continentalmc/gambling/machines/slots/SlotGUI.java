@@ -243,6 +243,8 @@ public class SlotGUI {
 
         player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1, 1);
         econ.depositPlayer(player, CasinoManager.getSlotWinning(materials.get(0)));
+        PlayerInteract.sendMessage(player, ChatColor.GREEN + "$" + CasinoManager.getSlotWinning(materials.get(0)) + " has been added to your balance!");
+
     }
     public boolean getIsRolling() {
         return isRolling;

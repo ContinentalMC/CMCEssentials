@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.ArmorStand;
 
 import java.io.File;
 import java.io.IOException;
@@ -135,6 +136,14 @@ public class CasinoManager {
         saveFile(cmc);
     }
 
+    public static void setBingoStand(CMCEssentials cmc, ArmorStand armorStand) {
+        casinoYML.set("bingoStand", armorStand.getUniqueId().toString());
+        saveFile(cmc);
+    }
+
+    public static UUID getBingoStand() { return UUID.fromString(Objects.requireNonNull(casinoYML.getString("bingoStand")));}
+
+
     public static void setLoc(CMCEssentials cmc, int pointNum, Location loc) {
         casinoYML.set("bingoCuboid.loc" + pointNum, loc);
         saveFile(cmc);
@@ -180,6 +189,7 @@ public class CasinoManager {
     public static int getPercentageCut() { return casinoYML.getInt("bingoCut"); }
     public static int getBingoMaxOut() { return casinoYML.getInt("bingoMaxOut"); }
     public static int getBingoTotal() { return casinoYML.getInt("bingoTotal"); }
+    public static int getBingoCut() { return casinoYML.getInt("bingoCut"); }
     public static List<Material> getBingoMaterials() {
         List<Material> materials = new ArrayList<>();
         for (String string : casinoYML.getStringList("bingoMaterials")) {

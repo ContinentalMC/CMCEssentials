@@ -109,6 +109,7 @@ public class ImpostorGUI {
 
         Economy econ = CMCEssentials.getEconomy();
         econ.depositPlayer(player, CasinoManager.getImpostorWinning("REGULAR"));
+        PlayerInteract.sendMessage(player, ChatColor.GREEN + "$" + CasinoManager.getImpostorWinning("REGULAR") + " has been added to your balance!");
 
         // changing retry head
         if (checkHasToken()) {
@@ -130,6 +131,8 @@ public class ImpostorGUI {
 
         Economy econ = CMCEssentials.getEconomy();
         econ.depositPlayer(player, CasinoManager.getImpostorWinning("GOLDEN"));
+        PlayerInteract.sendMessage(player, ChatColor.GREEN + "$" + CasinoManager.getImpostorWinning("GOLDEN") + " has been added to your balance!");
+
     }
 
     public void setLosing(int invSlot) {

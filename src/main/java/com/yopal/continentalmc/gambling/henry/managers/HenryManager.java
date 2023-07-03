@@ -19,14 +19,10 @@ public class HenryManager {
 
     public static void spawn(CMCEssentials cmc, Location loc) {
         Villager henry = (Villager) loc.getWorld().spawnEntity(loc, EntityType.VILLAGER);
-        // proffession not working
         henry.setVillagerLevel(5);
         henry.setVillagerType(Villager.Type.PLAINS);
         henry.setProfession(Villager.Profession.LIBRARIAN);
         henry.setInvulnerable(true);
-
-        System.out.println(henry.getProfession() + "" + henry.getVillagerType());
-
 
         henry.setCustomName(ChatColor.GREEN + "[NPC] " +  ChatColor.GOLD + ChatColor.BOLD + "Henry");
 

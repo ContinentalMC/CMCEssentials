@@ -308,6 +308,7 @@ public class RPSGUI {
 
         Economy econ = CMCEssentials.getEconomy();
         econ.depositPlayer(player, totalPool);
+        PlayerInteract.sendMessage(player, ChatColor.GREEN + "$" + totalPool + " has been added to your balance!");
 
         if (totalPool == 0) {
             player.sendMessage(PlayerInteract.returnPrefix() + ChatColor.GOLD + ChatColor.BOLD + "Henry: " + ChatColor.RED + "Oof, you lost huh. Better luck next time!");

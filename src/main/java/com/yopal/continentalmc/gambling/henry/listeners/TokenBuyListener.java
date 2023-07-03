@@ -1,6 +1,7 @@
 package com.yopal.continentalmc.gambling.henry.listeners;
 
 import com.yopal.continentalmc.CMCEssentials;
+import com.yopal.continentalmc.gambling.bingo.instances.Deposit;
 import com.yopal.continentalmc.gambling.henry.managers.HenryGUIManager;
 import com.yopal.continentalmc.gambling.henry.managers.TokenManager;
 import com.yopal.continentalmc.managers.YML.CasinoManager;
@@ -57,6 +58,7 @@ public class TokenBuyListener implements Listener {
                 }
 
                 econ.withdrawPlayer(player, hashMap.get("basic-coin"));
+                new Deposit(cmc, (hashMap.get("basic-coin") * CasinoManager.getBingoCut())/100);
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1, 2);
 
                 break;
@@ -76,6 +78,7 @@ public class TokenBuyListener implements Listener {
                 }
 
                 econ.withdrawPlayer(player, hashMap.get("good-coin"));
+                new Deposit(cmc, (hashMap.get("good-coin") * CasinoManager.getBingoCut())/100);
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1, 2);
 
                 break;
@@ -95,6 +98,7 @@ public class TokenBuyListener implements Listener {
                 }
 
                 econ.withdrawPlayer(player, hashMap.get("special-coin"));
+                new Deposit(cmc, (hashMap.get("special-coin") * CasinoManager.getBingoCut())/100);
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1, 2);
 
                 break;
@@ -114,6 +118,7 @@ public class TokenBuyListener implements Listener {
                 }
 
                 econ.withdrawPlayer(player, hashMap.get("insane-coin"));
+                new Deposit(cmc, (hashMap.get("insane-coin") * CasinoManager.getBingoCut())/100);
                 player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_BELL, 1, 2);
 
                 break;

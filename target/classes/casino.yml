@@ -126,6 +126,7 @@ villagerTextures:
 rpsWinPercentageDowngrade: 10
 rpsWinPercentageIncorrectDowngrade: 40
 
+
 # MULAH
 slots:
   COAL: 1250
@@ -140,6 +141,33 @@ horseBet: 10000
 platforms: 12500
 rockPaperScissors: 500
 
+bingoMaxOut: 50000
+bingoTotal: 0
+bingoCut: 10
+bingoMaterials:
+  - BREAD
+  - BOWL
+  - BOW
+  - BUCKET
+  - CACTUS
+  - CAKE
+  - EGG
+  - ELYTRA
+  - DROPPER
+  - DRAGON_EGG
+  - EMERALD_ORE
+  - IRON_SWORD
+  - ITEM_FRAME
+  - JUKEBOX
+  - MELON
+  - NAME_TAG
+  - RABBIT_STEW
+  - QUARTZ
+  - STONE
+  - STONE_HOE
+  - WHITE_WOOL
+  - BAMBOO
+  - BARREL
 
 # MACHINES
 machines:

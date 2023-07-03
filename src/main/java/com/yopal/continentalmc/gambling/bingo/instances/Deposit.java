@@ -20,8 +20,16 @@ public class Deposit extends BukkitRunnable {
     private CMCEssentials cmc;
     private ArmorStand armorStand;
 
-    public Deposit(int moneyInvolved) {
+    public Deposit(CMCEssentials cmc, int moneyInvolved) {
+
+        this.cmc = cmc;
         money = moneyInvolved;
+
+        if (CasinoManager.getBingoTotal() >= CasinoManager.getBingoMaxOut()) {
+            return;
+        }
+
+        spawnStand();
     }
 
     public void spawnStand() {
@@ -38,9 +46,11 @@ public class Deposit extends BukkitRunnable {
         Location randLoc = spawnLocs.get(random.nextInt(spawnLocs.size()));
 
         // ARMORSTAND
-        ArmorStand armorStand = (ArmorStand) cuboid.getWorld().spawnEntity(randLoc, EntityType.ARMOR_STAND);
+        armorStand = (ArmorStand) cuboid.getWorld().spawnEntity(randLoc, EntityType.ARMOR_STAND);
         armorStand.setCustomName(ChatColor.GREEN + ChatColor.BOLD.toString() + "$" + money);
         armorStand.setInvulnerable(true);
+        armorStand.setVisible(false);
+        armorStand.setSmall(true);
         armorStand.setCustomNameVisible(true);
         armorStand.setGravity(false);
 
@@ -50,16 +60,28 @@ public class Deposit extends BukkitRunnable {
         // SOUND
         cuboid.getWorld().playSound(randLoc, Sound.ENTITY_PLAYER_LEVELUP, 1, 2);
 
-        runTaskLater(cmc, 20);
+        runTaskLater(cmc, 40);
     }
 
     @Override
     public void run() {
         armorStand.remove();
+
         CasinoManager.addOnBingoTotal(cmc, money);
 
         if (CasinoManager.getBingoTotal() >= CasinoManager.getBingoMaxOut()) {
             BingoGUIManager.startBingo(cmc);
+        }
+
+        ArmorStand armorStand = (ArmorStand) Bukkit.getEntity(CasinoManager.getBingoStand());
+        if (armorStand == null) {
+            return;
+        }
+
+        armorStand.setCustomName(ChatColor.GREEN + ChatColor.BOLD.toString() + "TOTAL POOL: " + CasinoManager.getBingoTotal());
+
+        for (BingoGUI gui : BingoGUIManager.getGUIS()) {
+            gui.updatePool();
         }
     }
 }

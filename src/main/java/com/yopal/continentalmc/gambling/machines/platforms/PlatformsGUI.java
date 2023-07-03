@@ -120,6 +120,7 @@ public class PlatformsGUI {
 
         Economy econ = CMCEssentials.getEconomy();
         econ.depositPlayer(player, CasinoManager.getPlatformsWinning());
+        PlayerInteract.sendMessage(player, ChatColor.GREEN + "$" + CasinoManager.getPlatformsWinning() + " has been added to your balance!");
 
         // changing retry head
         if (checkHasToken()) {
