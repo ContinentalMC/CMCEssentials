@@ -228,7 +228,7 @@ public class PageUtil {
     public static void setCustomSkull(Inventory inv, String textureString, int slot) {
         ItemStack itemStack = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta skullMeta = (SkullMeta) itemStack.getItemMeta();
-        GameProfile profile = new GameProfile(UUID.randomUUID(), null);
+        GameProfile profile = new GameProfile(UUID.randomUUID(), String.valueOf(Math.random()));
         profile.getProperties().put("textures", new Property("textures", textureString));
         Field field;
         try {
